@@ -6,6 +6,7 @@
 package AEstrella;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 
@@ -72,14 +73,15 @@ public class AEstrella {
         Coordenada dragon=mundo.getDragon();
         EnumSet<Direction> enumset= EnumSet.of(Direction.E, Direction.NE, Direction.NW, Direction.SE,Direction.SW, Direction.W);
         boolean sol=false;
-        while(!listaFrontera.isEmpty()&&!sol){
+        while(!listaFrontera.isEmpty()&&!encontrado){
+            Collections.sort(listaFrontera);
             Node auxNode= listaFrontera.remove(0);
             listaInterior.add(auxNode);
             //encontrar dragon, Cambiar a letra
             if(mundo.mundo[auxNode.cor.y][auxNode.cor.x]=='d'){
                 //Node meta.
                 //reconstruir cami.
-                sol=true;
+                encontrado=true;
             }
             else{
                 //expandir 
@@ -98,10 +100,24 @@ public class AEstrella {
                         //System.out.println(c);
                         //valores recorribles
                         if(!(c=='b'||c=='p')){
-                            System.out.println(c);
+                            //System.out.println(c);
                             int w=Util.calcularPeso(c);
                             Node aux= new Node(auxCor,auxNode,auxNode.g,h,w);
-                            System.out.println(w);
+                            //System.out.println(w);
+                            if(!listaInterior.contains(aux)){
+                                if(!listaFrontera.contains(aux)){
+                                    listaFrontera.add(aux);
+                                }
+                                else{
+                                    Node lista=listaFrontera.remove(listaFrontera.indexOf(aux));
+                                    if(aux.g<lista.g){
+                                        listaFrontera.add(aux);
+                                    }
+                                    else{
+                                        listaFrontera.add(lista);
+                                    }
+                                }
+                            }
                         }
                     }
                     
