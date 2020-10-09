@@ -56,6 +56,20 @@ public class AEstrella {
     
     //Calcula el A*
     public int CalcularAEstrella(){
+        
+        
+        if(Util.isEven(3)){
+               System.out.println("No es par 3");
+            }
+            if(Util.isEven(4)){
+                System.out.println("Es par 4");
+            }
+        if(Util.isOdd(5)){
+            System.out.println("Es impar 5");
+        }
+        if(Util.isOdd(6)){
+            System.out.println("Es impar 6");
+        }
 
         boolean encontrado = false;
         int result = -1;
@@ -74,13 +88,23 @@ public class AEstrella {
         EnumSet<Direction> enumset= EnumSet.of(Direction.E, Direction.NE, Direction.NW, Direction.SE,Direction.SW, Direction.W);
         boolean sol=false;
         while(!listaFrontera.isEmpty()&&!encontrado){
+            
+            
             Collections.sort(listaFrontera);
             Node auxNode= listaFrontera.remove(0);
             listaInterior.add(auxNode);
+            camino_expandido[auxNode.cor.y][auxNode.cor.x]=expandidos;
+            expandidos++;
             //encontrar dragon, Cambiar a letra
             if(mundo.mundo[auxNode.cor.y][auxNode.cor.x]=='d'){
                 //Node meta.
                 //reconstruir cami.
+                Node pare=auxNode.pare;
+                while(pare!=null){
+                    camino[auxNode.cor.y][auxNode.cor.x]='x';
+                    auxNode=auxNode.pare;
+                    pare=auxNode.pare;
+                }
                 encontrado=true;
             }
             else{
@@ -93,7 +117,7 @@ public class AEstrella {
                     y=auxCor.y;
                     //int tamanyo_x;
                     //int tamanyo_y;
-                    int h=1;
+                    int h=0;
                     //dentro del tablero
                     if(x<mundo.tamanyo_x&&x>=0&&y<mundo.tamanyo_y&&y>=0){
                         char c= mundo.mundo[y][x];
