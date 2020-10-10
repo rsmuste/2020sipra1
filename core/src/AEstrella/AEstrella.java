@@ -57,7 +57,7 @@ public class AEstrella {
     //Calcula el A*
     public int CalcularAEstrella(){
         
-        
+        /*
         if(Util.isEven(3)){
                System.out.println("No es par 3");
             }
@@ -69,7 +69,8 @@ public class AEstrella {
         }
         if(Util.isOdd(6)){
             System.out.println("Es impar 6");
-        }
+        }*/
+        
 
         boolean encontrado = false;
         int result = -1;
@@ -86,6 +87,9 @@ public class AEstrella {
         Coordenada caballero=mundo.getCaballero();
         Coordenada dragon=mundo.getDragon();
         EnumSet<Direction> enumset= EnumSet.of(Direction.E, Direction.NE, Direction.NW, Direction.SE,Direction.SW, Direction.W);
+        //Comprobar EnumSet para filas pares e impares
+        
+        
         boolean sol=false;
         while(!listaFrontera.isEmpty()&&!encontrado){
             

@@ -12,11 +12,11 @@ package AEstrella;
 public enum Direction {
     //x columnas, y filas
     //even odd row
-    NE(0,1,-1),
-    NW(-1,0,-1),
-    SE(0,1,1),
-    SW(-1,0,1),
+    NE(0,1,1),
+    NW(-1,0,1),
     E(1,1,0),
+    SE(0,1,-1),
+    SW(-1,0,1),
     W(-1,-1,0),
     C(0,0,0);
     
