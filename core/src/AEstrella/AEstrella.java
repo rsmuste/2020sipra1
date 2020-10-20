@@ -55,6 +55,11 @@ public class AEstrella {
     }
     
     //Calcula el A*
+    private boolean TestDireccionesPares(){
+    boolean res=false;
+    Coordenada par = new Coordenada(2, 1);
+    return res;
+    }
     public int CalcularAEstrella(){
         
         /*
@@ -105,10 +110,13 @@ public class AEstrella {
                 //reconstruir cami.
                 Node pare=auxNode.pare;
                 while(pare!=null){
+                    System.out.println("("+auxNode.cor.y+","+auxNode.cor.x+")");
                     camino[auxNode.cor.y][auxNode.cor.x]='x';
                     auxNode=auxNode.pare;
                     pare=auxNode.pare;
                 }
+                camino[auxNode.cor.y][auxNode.cor.x]='x';
+                System.out.println("("+auxNode.cor.y+","+auxNode.cor.x+")");
                 encontrado=true;
             }
             else{
