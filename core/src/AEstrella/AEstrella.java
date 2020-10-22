@@ -91,12 +91,43 @@ public class AEstrella {
         //bucle
         Coordenada caballero=mundo.getCaballero();
         Coordenada dragon=mundo.getDragon();
-        EnumSet<Direction> enumset= EnumSet.of(Direction.E, Direction.NE, Direction.NW, Direction.SE,Direction.SW, Direction.W);
+        //Direction.E, Direction.NE, Direction.NW, Direction.SE,Direction.SW, Direction.W, Direction.C
+        EnumSet<Direction> enumset= EnumSet.of(Direction.E, Direction.NE, Direction.NW, Direction.SE,Direction.SW, Direction.W, Direction.C);
         //Comprobar EnumSet para filas pares e impares
+        Coordenada impar = new Coordenada(5,5);
+        Coordenada par = new Coordenada(2,2);
+        //new Coordenada(result, result)
+        int i=0;
+        System.out.println("par "+par.y+","+par.x);
+        for(Direction d : enumset){
+            char c= 'a';
+            i++;
+            Coordenada aux=d.getNeighborCoordinates(par);
+            System.out.println(i+" coordenada "+aux.y+","+aux.x);
+            camino[aux.y][aux.x]='X';
+           
+        }
+        camino[par.y][par.x]='I';
+        System.out.println("Camino");
+        mostrarCamino();
+        
+        
+         i=0;
+        for(Direction d : enumset){
+            i++;
+            Coordenada aux=d.getNeighborCoordinates(impar);
+            System.out.println(i+" coordenada "+aux.y+","+aux.x);
+            camino[aux.y][aux.x]='X';
+           
+        }
+        camino[impar.y][impar.x]='P';
+        System.out.println("Camino");
+        mostrarCamino();
+        
         
         
         boolean sol=false;
-        while(!listaFrontera.isEmpty()&&!encontrado){
+/*        while(!listaFrontera.isEmpty()){
             
             
             Collections.sort(listaFrontera);
@@ -174,13 +205,13 @@ public class AEstrella {
                             }
                             }
                         }
-                    }*/
-                }
-            }
+                    //}*/
+                //}
+            //}
             
             
             
-        }
+        //}*/
       
 
         //Si ha encontrado la solución, es decir, el camino, muestra las matrices camino y camino_expandidos y el número de nodos expandidos

@@ -12,33 +12,34 @@ package AEstrella;
 public enum Direction {
     //x columnas, y filas
     //even odd row
-    NE(0,1,1),
-    NW(-1,0,1),
-    E(1,1,0),
-    SE(0,1,-1),
-    SW(-1,0,1),
-    W(-1,-1,0),
+    //y xPar xImpar
+    NW(-1,0,-1),
+    NE(-1,1,0),
+    W(0,-1,-1),
+    E(0,1,1),
+    SW(1,0,-1),
+    SE(1,1,0),
     C(0,0,0);
     
-    private final int incRow;
-    private final int incColumnEven;
-    private final int incColumnOdd;
-    private Direction(final int incJEven, final int incJOdd,final int incI) {
-        this.incRow = incI;
-        this.incColumnEven = incJEven;
-        this.incColumnOdd = incJOdd;
+    private final int incY;
+    private final int incXEven;
+    private final int incXOdd;
+    private Direction(final int incI, final int incJEven, final int incJOdd) {
+        this.incY = incI;
+        this.incXEven = incJEven;
+        this.incXOdd = incJOdd;
     }
 
     public int getIncRow() {
-        return incRow;
+        return incY;
     }
 
     public int getIncColumnEven() {
-        return incColumnEven;
+        return incXEven;
     }
 
     public int getIncColumnOdd() {
-        return incColumnOdd;
+        return incXOdd;
     }
     //probar funcio
     //agafa la coordenada y si es par suma la columna 0 i si es impar la columna 1;
