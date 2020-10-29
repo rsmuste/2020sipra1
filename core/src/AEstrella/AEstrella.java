@@ -94,17 +94,20 @@ public class AEstrella {
         //Direction.E, Direction.NE, Direction.NW, Direction.SE,Direction.SW, Direction.W, Direction.C
         EnumSet<Direction> enumset= EnumSet.of(Direction.E, Direction.NE, Direction.NW, Direction.SE,Direction.SW, Direction.W);
         //Comprobar EnumSet para filas pares e impares
-        /*Coordenada impar = new Coordenada(5,5);
+        /*
+        Coordenada impar = new Coordenada(5,5);
         Coordenada par = new Coordenada(2,2);
         //new Coordenada(result, result)
         int i=0;
         System.out.println("par "+par.y+","+par.x);
-        for(Direction d : enumset){
             char c= 'a';
+        for(Direction d : enumset){
+            
             i++;
             Coordenada aux=d.getNeighborCoordinates(par);
             System.out.println(i+" coordenada "+aux.y+","+aux.x);
-            camino[aux.y][aux.x]='X';
+            camino[aux.y][aux.x]=c;
+            c++;
            
         }
         camino[par.y][par.x]='I';
@@ -113,11 +116,13 @@ public class AEstrella {
         
         
          i=0;
+         System.out.println("impar "+impar.y+","+impar.x);
         for(Direction d : enumset){
+            c++;
             i++;
             Coordenada aux=d.getNeighborCoordinates(impar);
             System.out.println(i+" coordenada "+aux.y+","+aux.x);
-            camino[aux.y][aux.x]='X';
+            camino[aux.y][aux.x]=c;
            
         }
         camino[impar.y][impar.x]='P';
@@ -127,91 +132,7 @@ public class AEstrella {
         
         
         boolean sol=false;
-        while(!listaFrontera.isEmpty()){
-            
-            
-            Collections.sort(listaFrontera);
-            Node auxNode= listaFrontera.remove(0);
-            listaInterior.add(auxNode);
-            camino_expandido[auxNode.cor.y][auxNode.cor.x]=expandidos;
-            expandidos++;
-            //encontrar dragon, Cambiar a letra
-            if(mundo.mundo[auxNode.cor.y][auxNode.cor.x]=='d'){
-                //Node meta.
-                //reconstruir cami.
-                Node pare=auxNode.pare;
-                while(pare!=null){
-                    System.out.println("("+auxNode.cor.y+","+auxNode.cor.x+")");
-                    camino[auxNode.cor.y][auxNode.cor.x]='x';
-                    auxNode=auxNode.pare;
-                    pare=auxNode.pare;
-                }
-                camino[auxNode.cor.y][auxNode.cor.x]='x';
-                System.out.println("("+auxNode.cor.y+","+auxNode.cor.x+")");
-                encontrado=true;
-            }
-            else{
-                //expandir 
-                for(Direction dir: enumset){
-                    Coordenada auxCor= dir.getNeighborCoordinates(auxNode.cor);
-                    //Comprobamos que este en el mapa.
-                    int x,y;
-                    x=auxCor.x;
-                    y=auxCor.y;
-                    //int tamanyo_x;
-                    //int tamanyo_y;
-                    int h=0;
-                    //dentro del tablero
-                    if(x<mundo.tamanyo_x&&x>=0&&y<mundo.tamanyo_y&&y>=0){
-                        char c= mundo.mundo[y][x];
-                        //System.out.println(c);
-                        //valores recorribles
-                        if(!(c=='b'||c=='p')){
-                            //System.out.println(c);
-                            int w=Util.calcularPeso(c);
-                            Node aux= new Node(auxCor,auxNode,auxNode.g,h,w);
-                            //System.out.println(w);
-                            if(!listaInterior.contains(aux)){
-                                if(!listaFrontera.contains(aux)){
-                                    listaFrontera.add(aux);
-                                }
-                                else{
-                                    Node lista=listaFrontera.remove(listaFrontera.indexOf(aux));
-                                    if(aux.g<lista.g){
-                                        listaFrontera.add(aux);
-                                    }
-                                    else{
-                                        listaFrontera.add(lista);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    
-                   /* if(x<mundo.tamanyo_x&&x>=0&&y<mundo.tamanyo_y&&y>=0){
-                        char c= mundo.mundo[y][x];
-                        
-                        if(!(c=='p'||c=='b')){
-                            int w=Util.calcularPeso(c);
-                            Node aux= new Node(auxCor, auxNode,auxNode.g,h,w);
-                            if(!listaInterior.contains(aux)){
-                                if(listaFrontera.contains(aux)){
-                                    Node aux2=listaInterior.get(listaInterior.indexOf(aux));
-                                    
-                                    
-                                }
-                            else{
-                                listaFrontera.add(aux);
-                            }
-                            }
-                        }
-                    }*/
-                }
-            }
-            
-            
-            
-        }
+        
       
 
         //Si ha encontrado la solución, es decir, el camino, muestra las matrices camino y camino_expandidos y el número de nodos expandidos
