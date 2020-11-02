@@ -81,7 +81,8 @@ public class AEstrella {
         int result = -1;
         
         //AQUÍ ES DONDE SE DEBE IMPLEMENTAR A*
-        Node expandir;
+        Node nmenor;
+        Node nexpand;
         //listaExplorados.
         List<Node> listaInterior = new ArrayList<>();
         //ListaPorExplorar
@@ -93,6 +94,38 @@ public class AEstrella {
         Coordenada dragon=mundo.getDragon();
         //Direction.E, Direction.NE, Direction.NW, Direction.SE,Direction.SW, Direction.W, Direction.C
         EnumSet<Direction> enumset= EnumSet.of(Direction.E, Direction.NE, Direction.NW, Direction.SE,Direction.SW, Direction.W);
+        while(!listaFrontera.isEmpty()){
+            Collections.sort(listaFrontera);
+            nmenor=listaFrontera.get(0);
+            if(nmenor.cor.getX()==caballero.getX()&&nmenor.cor.getY()==caballero.getY()){
+                //encontrada la solucion.
+            }
+            else{
+                //expando el nodo.
+                Coordenada expand;
+                int xx, yy;
+                char c;
+                for(Direction dir: enumset){
+                    expand=dir.getNeighborCoordinates(nmenor.cor);
+                    //comprobar que es abastable
+                    xx=expand.getX();
+                    yy=expand.getY();
+                    if(xx>=0&&xx<mundo.tamanyo_x&&yy>=0&&yy<mundo.tamanyo_y){
+                       c = mundo.getCelda(xx, yy);
+                       //accesible
+                       if(c=='b'||c=='p'){
+                           //crear el nodo correspodiente
+                           
+                           nexpand= new Node(expand,nmenor,nmenor.g,nmenor.h,Util.calcularPeso(c));
+                           //
+                       }
+                        
+                    }
+                }
+            }
+        }
+        
+        
         //Comprobar EnumSet para filas pares e impares
         /*
         Coordenada impar = new Coordenada(5,5);

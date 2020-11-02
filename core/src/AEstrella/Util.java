@@ -20,9 +20,6 @@ public class Util {
     public static int calcularPeso(char c){
         int res=0;
         switch(c){
-            case 'b':
-                res=-1;
-                break;
             case 'c':
                 res=1;
                 break;
@@ -31,9 +28,6 @@ public class Util {
                 break;
             case 'a':
                 res=3;
-                break;
-            case 'p':
-                res=-1;
                 break;
             default:
                 res=-1;
