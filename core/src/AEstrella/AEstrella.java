@@ -94,11 +94,25 @@ public class AEstrella {
         Coordenada dragon=mundo.getDragon();
         //Direction.E, Direction.NE, Direction.NW, Direction.SE,Direction.SW, Direction.W, Direction.C
         EnumSet<Direction> enumset= EnumSet.of(Direction.E, Direction.NE, Direction.NW, Direction.SE,Direction.SW, Direction.W);
-        while(!listaFrontera.isEmpty()){
+        int ce=0;
+        while(!listaFrontera.isEmpty()&&!encontrado){
+            
             Collections.sort(listaFrontera);
-            nmenor=listaFrontera.get(0);
-            if(nmenor.cor.getX()==caballero.getX()&&nmenor.cor.getY()==caballero.getY()){
+            nmenor=listaFrontera.remove(0);
+            listaInterior.add(nmenor);
+            camino_expandido[nmenor.cor.getY()][nmenor.cor.getX()]=ce;
+            ce++;
+            System.out.println("Encontrado : "+ce);
+            //solucion encontrada
+            if(nmenor.cor.getX()==dragon.getX()&&nmenor.cor.getY()==dragon.getY()){
                 //encontrada la solucion.
+                
+                encontrado=true;
+                Node auxPare= nmenor;
+                while(nmenor.pare!=null){
+                    camino[nmenor.cor.getY()][nmenor.cor.getX()]='x';
+                    nmenor=nmenor.pare;    
+                }
             }
             else{
                 //expando el nodo.
@@ -113,11 +127,31 @@ public class AEstrella {
                     if(xx>=0&&xx<mundo.tamanyo_x&&yy>=0&&yy<mundo.tamanyo_y){
                        c = mundo.getCelda(xx, yy);
                        //accesible
-                       if(c=='b'||c=='p'){
+                       if(c=='a'||c=='h'||c=='c'){
                            //crear el nodo correspodiente
                            
                            nexpand= new Node(expand,nmenor,nmenor.g,nmenor.h,Util.calcularPeso(c));
-                           //
+                           expandidos++;
+                           //Comprobar que el nodo no haya sido explorado
+                           if(!listaInterior.contains(nexpand)){
+                               //comprobar que el nodo no haya sido expandido
+                               if(!listaFrontera.contains(nexpand)){
+                                   listaFrontera.add(nexpand);
+                               }
+                               else{
+                                   //comprobar que el nuevo nodo sea mejor que el nodo existente
+                                   Node lista = listaFrontera.remove(listaFrontera.indexOf(nexpand));
+                                   if(nexpand.g<lista.g){
+                                       //remplazar el viejo nodo por el nuevo
+                                       listaFrontera.add(nexpand);
+                                   }
+                                   else{
+                                       //volver a meter el viejo nodo.
+                                       listaFrontera.add(lista);
+                                   }
+                               }
+                           }
+                          
                        }
                         
                     }
