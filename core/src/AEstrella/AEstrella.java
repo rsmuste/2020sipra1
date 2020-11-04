@@ -127,7 +127,7 @@ public class AEstrella {
                     if(xx>=0&&xx<mundo.tamanyo_x&&yy>=0&&yy<mundo.tamanyo_y){
                        c = mundo.getCelda(xx, yy);
                        //accesible
-                       if(c=='a'||c=='h'||c=='c'){
+                       if(!(c=='b'||c=='p')){
                            //crear el nodo correspodiente
                            
                            nexpand= new Node(expand,nmenor,nmenor.g,nmenor.h,Util.calcularPeso(c));
@@ -143,7 +143,7 @@ public class AEstrella {
                                    Node lista = listaFrontera.remove(listaFrontera.indexOf(nexpand));
                                    if(nexpand.g<lista.g){
                                        //remplazar el viejo nodo por el nuevo
-                                       listaFrontera.add(nexpand);
+                                      // listaFrontera.add(nexpand);
                                    }
                                    else{
                                        //volver a meter el viejo nodo.
