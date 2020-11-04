@@ -30,9 +30,42 @@ public class Util {
                 res=3;
                 break;
             default:
-                res=-1;
+                res=0;
                 break;
         }
+        return res;
+    }
+    public static double manhattan(Coordenada destino, Coordenada inicio){
+        double res=0.0;
+            res=Math.abs(destino.x-inicio.x)+Math.abs(destino.y-inicio.y);
+        return res;
+    }
+    public static double euclidea(Coordenada destino, Coordenada inicio){
+        double res=0.0;
+            res=Math.sqrt(Math.pow(destino.x-inicio.x,2)+Math.pow(destino.y-inicio.y,2));
+        return res;
+    }
+    public static Cube offsetToCube(Coordenada hex){
+        Cube res= new Cube();
+            res.x= hex.x - (hex.y + (hex.y&1))/2;
+            res.z = hex.y;
+            res.y = -hex.x - hex.y;
+        return res;
+    }
+    public static Coordenada cubeToOffset(Cube cube){
+        Coordenada c = new Coordenada();
+            c.x = cube.x + (cube.z + (cube.z&1)) / 2;
+            c.y = cube.z;
+        return c;
+    }
+    public static double cubeManhattan(Cube destino, Cube inicio){
+        double res=0;
+            res = (Math.abs(destino.x-inicio.x)+Math.abs(destino.y-inicio.y)+Math.abs(destino.z-inicio.z)) / 2;
+        return res;
+    }
+    public static double cubeEuclidea(Cube destino, Cube inicio){
+        double res = 0;
+        
         return res;
     }
 }

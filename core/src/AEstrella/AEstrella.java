@@ -87,11 +87,15 @@ public class AEstrella {
         List<Node> listaInterior = new ArrayList<>();
         //ListaPorExplorar
         List<Node> listaFrontera = new ArrayList<>();
-        //Añadir Nodo Innicial a lista Frontera.
-        listaFrontera.add(new Node(mundo.getCaballero(),null,0,0,0));
-        //bucle
         Coordenada caballero=mundo.getCaballero();
         Coordenada dragon=mundo.getDragon();
+        double h = Util.manhattan(dragon, caballero);
+        //Añadir Nodo Innicial a lista Frontera.
+        listaFrontera.add(new Node(caballero,null,0,h,0));
+        //expandidos++;
+        expandidos=1;
+        //bucle
+        
         //Direction.E, Direction.NE, Direction.NW, Direction.SE,Direction.SW, Direction.W, Direction.C
         EnumSet<Direction> enumset= EnumSet.of(Direction.E, Direction.NE, Direction.NW, Direction.SE,Direction.SW, Direction.W);
         int ce=0;
@@ -109,37 +113,42 @@ public class AEstrella {
             iii--;
             //System.out.println("Encontrado : "+ce);
             //solucion encontrada
-            if(nmenor.cor.y==2&&nmenor.cor.x==3&&nmenor.pare.cor.y==1&&nmenor.pare.cor.x==2){
+            /*if(nmenor.cor.y==2&&nmenor.cor.x==3&&nmenor.pare.cor.y==1&&nmenor.pare.cor.x==2){
                 System.out.println("Aqui esta el error : "+iii);
                 
                 iii=0;
                 
-            }
+            }*/
             if(nmenor.cor.getX()==dragon.getX()&&nmenor.cor.getY()==dragon.getY()){
                 //encontrada la solucion.
                 
                 encontrado=true;
                 Node auxPare= nmenor;
+                //Peso del camino segun sus casillas recorridas.
+                coste_total = (int)Math.round(nmenor.g);
+               // System.out.println(coste_total);
+                //recorremos el camino inverso
                 while(nmenor.pare!=null){
-                    System.out.println(" "+nmenor.cor.getY()+ ", "+nmenor.cor.getX());
+                   // System.out.println(" "+nmenor.cor.getY()+ ", "+nmenor.cor.getX());
+                   //pintamos el camino
                     camino[nmenor.cor.getY()][nmenor.cor.getX()]='x';
                     nmenor=nmenor.pare;    
-                    
+                    coste_total++;
                     //if(nmenor.pare!=null)
                     //System.out.println(" "+nmenor.pare.cor.getY()+ ", "+nmenor.pare.cor.getX());
                 }
-                camino[nmenor.cor.getY()][nmenor.cor.getX()]='x';
-                System.out.println(" "+nmenor.cor.getY()+ ", "+nmenor.cor.getX());
+                //camino[nmenor.cor.getY()][nmenor.cor.getX()]='x';
+               // System.out.println(" "+nmenor.cor.getY()+ ", "+nmenor.cor.getX());
             }
             else{
                 //expando el nodo.
                 Coordenada expand;
                 int xx, yy;
                 char c;
-                System.out.println("NodoCentral "+nmenor.cor.y+" , "+nmenor.cor.x);
+                //System.out.println("NodoCentral "+nmenor.cor.y+" , "+nmenor.cor.x);
                 for(Direction dir: enumset){
                     expand=dir.getNeighborCoordinates(nmenor.cor);
-                    System.out.println(expand.y+" , "+expand.x);
+                    //System.out.println(expand.y+" , "+expand.x);
                     //comprobar que es abastable
                     xx=expand.getX();
                     yy=expand.getY();
@@ -148,20 +157,22 @@ public class AEstrella {
                        //accesible
                        if(!(c=='b'||c=='p')){
                            //crear el nodo correspodiente
-                           
-                           nexpand= new Node(expand,nmenor,nmenor.g,nmenor.h,Util.calcularPeso(c));
-                           
-                           if(nexpand.cor.y==2&&nexpand.cor.x==3){
+                           int w=Util.calcularPeso(c);
+                           //h = Util.cubeManhattan(Util.offsetToCube(dragon), Util.offsetToCube(expand));
+                           h = Util.manhattan(dragon, expand);
+                           nexpand= new Node(expand,nmenor,nmenor.g,h,w);
+                           expandidos++;
+                           //if(nexpand.cor.y==2&&nexpand.cor.x==3){
                                    //    System.out.println(expand.y+" , "+expand.x);
                                        
                                     //   System.out.println(nexpand.pare.cor.y+" , "+nexpand.pare.cor.x);
                                        
                                     //   System.out.println("Entro por aqui "+iii);
-                                   }
+                                 //  }
                            
                            //Comprobar que el nodo no haya sido explorado
                            if(!listaInterior.contains(nexpand)){
-                               expandidos++;
+                               //expandidos++;
                                //comprobar que el nodo no haya sido expandido
                                if(!listaFrontera.contains(nexpand)){
                                    listaFrontera.add(nexpand);
@@ -236,7 +247,7 @@ public class AEstrella {
       
 
         //Si ha encontrado la solución, es decir, el camino, muestra las matrices camino y camino_expandidos y el número de nodos expandidos
-        if(true){
+        if(encontrado){
             //Mostrar las soluciones
             System.out.println("Camino");
             mostrarCamino();
