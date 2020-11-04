@@ -44,7 +44,7 @@ public enum Direction {
     //probar funcio
     //agafa la coordenada y si es par suma la columna 0 i si es impar la columna 1;
     public Coordenada getNeighborCoordinates(Coordenada coor){
-        int col= coor.x+(Util.isEven(coor.x) ? getIncColumnEven(): getIncColumnOdd());
+        int col= coor.x+(Util.isEven(coor.y) ? getIncColumnEven(): getIncColumnOdd());
         int row= coor.y+getIncRow();
         return new Coordenada(col,row);
     }

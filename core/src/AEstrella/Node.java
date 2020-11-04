@@ -15,6 +15,7 @@ public class Node implements Comparable{
     double f;
     double h;
     double g;
+
     //revisar si es necesario aqui.
 
     public Node(Coordenada c, Node p, double g, double h, int w){

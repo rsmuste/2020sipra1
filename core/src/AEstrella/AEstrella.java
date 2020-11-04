@@ -95,32 +95,51 @@ public class AEstrella {
         //Direction.E, Direction.NE, Direction.NW, Direction.SE,Direction.SW, Direction.W, Direction.C
         EnumSet<Direction> enumset= EnumSet.of(Direction.E, Direction.NE, Direction.NW, Direction.SE,Direction.SW, Direction.W);
         int ce=0;
-        while(!listaFrontera.isEmpty()&&!encontrado){
+        int iii=1000;
+        char cc= 'a';
+        while(!listaFrontera.isEmpty()&&!encontrado&&iii!=0){
             
             Collections.sort(listaFrontera);
             nmenor=listaFrontera.remove(0);
             listaInterior.add(nmenor);
             camino_expandido[nmenor.cor.getY()][nmenor.cor.getX()]=ce;
             ce++;
-            System.out.println("Encontrado : "+ce);
+            //camino[nmenor.cor.getY()][nmenor.cor.getX()]=cc;
+            cc++;
+            iii--;
+            //System.out.println("Encontrado : "+ce);
             //solucion encontrada
+            if(nmenor.cor.y==2&&nmenor.cor.x==3&&nmenor.pare.cor.y==1&&nmenor.pare.cor.x==2){
+                System.out.println("Aqui esta el error : "+iii);
+                
+                iii=0;
+                
+            }
             if(nmenor.cor.getX()==dragon.getX()&&nmenor.cor.getY()==dragon.getY()){
                 //encontrada la solucion.
                 
                 encontrado=true;
                 Node auxPare= nmenor;
                 while(nmenor.pare!=null){
+                    System.out.println(" "+nmenor.cor.getY()+ ", "+nmenor.cor.getX());
                     camino[nmenor.cor.getY()][nmenor.cor.getX()]='x';
                     nmenor=nmenor.pare;    
+                    
+                    //if(nmenor.pare!=null)
+                    //System.out.println(" "+nmenor.pare.cor.getY()+ ", "+nmenor.pare.cor.getX());
                 }
+                camino[nmenor.cor.getY()][nmenor.cor.getX()]='x';
+                System.out.println(" "+nmenor.cor.getY()+ ", "+nmenor.cor.getX());
             }
             else{
                 //expando el nodo.
                 Coordenada expand;
                 int xx, yy;
                 char c;
+                System.out.println("NodoCentral "+nmenor.cor.y+" , "+nmenor.cor.x);
                 for(Direction dir: enumset){
                     expand=dir.getNeighborCoordinates(nmenor.cor);
+                    System.out.println(expand.y+" , "+expand.x);
                     //comprobar que es abastable
                     xx=expand.getX();
                     yy=expand.getY();
@@ -131,19 +150,33 @@ public class AEstrella {
                            //crear el nodo correspodiente
                            
                            nexpand= new Node(expand,nmenor,nmenor.g,nmenor.h,Util.calcularPeso(c));
-                           expandidos++;
+                           
+                           if(nexpand.cor.y==2&&nexpand.cor.x==3){
+                                   //    System.out.println(expand.y+" , "+expand.x);
+                                       
+                                    //   System.out.println(nexpand.pare.cor.y+" , "+nexpand.pare.cor.x);
+                                       
+                                    //   System.out.println("Entro por aqui "+iii);
+                                   }
+                           
                            //Comprobar que el nodo no haya sido explorado
                            if(!listaInterior.contains(nexpand)){
+                               expandidos++;
                                //comprobar que el nodo no haya sido expandido
                                if(!listaFrontera.contains(nexpand)){
                                    listaFrontera.add(nexpand);
                                }
                                else{
+                                   
+                                  // System.out.println("Entro por aqui "+iii);
                                    //comprobar que el nuevo nodo sea mejor que el nodo existente
                                    Node lista = listaFrontera.remove(listaFrontera.indexOf(nexpand));
+                               //    System.out.println(lista.cor.y+" , "+lista.cor.x+" : "+lista.pare.cor.y+ ", "+lista.pare.cor.x+" : " +lista.g);
+//                                   System.out.println(nexpand.cor.y+" , "+nexpand.cor.x+" : "+nexpand.pare.cor.y+ ", "+nexpand.pare.cor.x+" : " +nexpand.g);
+                                   //System.out.println(nexpand.cor.y+" , "+nexpand.cor.x+" : "+nexpand.g);
                                    if(nexpand.g<lista.g){
                                        //remplazar el viejo nodo por el nuevo
-                                      // listaFrontera.add(nexpand);
+                                       listaFrontera.add(nexpand);
                                    }
                                    else{
                                        //volver a meter el viejo nodo.
@@ -203,7 +236,7 @@ public class AEstrella {
       
 
         //Si ha encontrado la solución, es decir, el camino, muestra las matrices camino y camino_expandidos y el número de nodos expandidos
-        if(encontrado){
+        if(true){
             //Mostrar las soluciones
             System.out.println("Camino");
             mostrarCamino();
