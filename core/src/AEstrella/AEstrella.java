@@ -81,6 +81,7 @@ public class AEstrella {
         int result = -1;
         
         //AQUÍ ES DONDE SE DEBE IMPLEMENTAR A*
+        coste_total=0;
         Node nmenor;
         Node nexpand;
         //listaExplorados.
@@ -105,7 +106,7 @@ public class AEstrella {
         EnumSet<Direction> enumset= EnumSet.of(Direction.E, Direction.NE, Direction.NW, Direction.SE,Direction.SW, Direction.W);
         int ce=0;
         int iii=1000;
-        char cc= 'a';
+       // char cc= 'a';
         while(!listaFrontera.isEmpty()&&!encontrado&&iii!=0){
             
             Collections.sort(listaFrontera);
@@ -116,7 +117,7 @@ public class AEstrella {
             camino_expandido[nmenor.cor.getY()][nmenor.cor.getX()]=(int)nmenor.h;
             ce++;
             //camino[nmenor.cor.getY()][nmenor.cor.getX()]=cc;
-            cc++;
+            //cc++;
             iii--;
             //System.out.println("Encontrado : "+ce);
             //solucion encontrada
@@ -132,7 +133,7 @@ public class AEstrella {
                 encontrado=true;
                 Node auxPare= nmenor;
                 //Peso del camino segun sus casillas recorridas.
-                coste_total = (int)Math.round(nmenor.g);
+                //coste_total = (int)Math.round(nmenor.g);
                // System.out.println(coste_total);
                 //recorremos el camino inverso
                 while(nmenor.pare!=null){
@@ -143,7 +144,9 @@ public class AEstrella {
                     //coste_total++;
                     //if(nmenor.pare!=null)
                     //System.out.println(" "+nmenor.pare.cor.getY()+ ", "+nmenor.pare.cor.getX());
+                    coste_total++;
                 }
+                result = (int)Math.round(nmenor.g);
                 //System.out.println(coste_total);
                 //camino[nmenor.cor.getY()][nmenor.cor.getX()]='x';
                // System.out.println(" "+nmenor.cor.getY()+ ", "+nmenor.cor.getX());
