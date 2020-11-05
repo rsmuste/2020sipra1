@@ -89,11 +89,16 @@ public class AEstrella {
         List<Node> listaFrontera = new ArrayList<>();
         Coordenada caballero=mundo.getCaballero();
         Coordenada dragon=mundo.getDragon();
-        double h = Util.manhattan(dragon, caballero);
+        //double h = Util.euclidea(dragon, caballero);
+        double h = Util.cubeDistance(Util.evenr_to_cube(dragon), Util.evenr_to_cube(caballero));
+
         //Añadir Nodo Innicial a lista Frontera.
         listaFrontera.add(new Node(caballero,null,0,h,0));
         //expandidos++;
         expandidos=1;
+        Coordenada dd = new Coordenada(2,7);
+        Coordenada dc = new Coordenada(1,6);
+        System.out.println(Util.cubeDistance(Util.evenr_to_cube(dragon), Util.evenr_to_cube(dc)));
         //bucle
         
         //Direction.E, Direction.NE, Direction.NW, Direction.SE,Direction.SW, Direction.W, Direction.C
@@ -106,7 +111,8 @@ public class AEstrella {
             Collections.sort(listaFrontera);
             nmenor=listaFrontera.remove(0);
             listaInterior.add(nmenor);
-            camino_expandido[nmenor.cor.getY()][nmenor.cor.getX()]=ce;
+            //camino_expandido[nmenor.cor.getY()][nmenor.cor.getX()]=ce;
+            camino_expandido[nmenor.cor.getY()][nmenor.cor.getX()]=(int)nmenor.h;
             ce++;
             //camino[nmenor.cor.getY()][nmenor.cor.getX()]=cc;
             cc++;
@@ -133,10 +139,11 @@ public class AEstrella {
                    //pintamos el camino
                     camino[nmenor.cor.getY()][nmenor.cor.getX()]='x';
                     nmenor=nmenor.pare;    
-                    coste_total++;
+                    //coste_total++;
                     //if(nmenor.pare!=null)
                     //System.out.println(" "+nmenor.pare.cor.getY()+ ", "+nmenor.pare.cor.getX());
                 }
+                System.out.println(coste_total);
                 //camino[nmenor.cor.getY()][nmenor.cor.getX()]='x';
                // System.out.println(" "+nmenor.cor.getY()+ ", "+nmenor.cor.getX());
             }
@@ -158,8 +165,8 @@ public class AEstrella {
                        if(!(c=='b'||c=='p')){
                            //crear el nodo correspodiente
                            int w=Util.calcularPeso(c);
-                           //h = Util.cubeManhattan(Util.offsetToCube(dragon), Util.offsetToCube(expand));
-                           h = Util.manhattan(dragon, expand);
+                           h = Util.cubeDistance(Util.evenr_to_cube(dragon), Util.evenr_to_cube(expand));
+                           //h = Util.euclidea(dragon, expand);
                            nexpand= new Node(expand,nmenor,nmenor.g,h,w);
                            expandidos++;
                            //if(nexpand.cor.y==2&&nexpand.cor.x==3){
