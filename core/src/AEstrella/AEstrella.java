@@ -96,9 +96,9 @@ public class AEstrella {
         listaFrontera.add(new Node(caballero,null,0,h,0));
         //expandidos++;
         expandidos=1;
-        Coordenada dd = new Coordenada(2,7);
-        Coordenada dc = new Coordenada(1,6);
-        System.out.println(Util.cubeDistance(Util.evenr_to_cube(dragon), Util.evenr_to_cube(dc)));
+        //Coordenada dd = new Coordenada(2,7);
+        //Coordenada dc = new Coordenada(1,6);
+        //System.out.println(Util.cubeDistance(Util.evenr_to_cube(dragon), Util.evenr_to_cube(dc)));
         //bucle
         
         //Direction.E, Direction.NE, Direction.NW, Direction.SE,Direction.SW, Direction.W, Direction.C
@@ -112,6 +112,7 @@ public class AEstrella {
             nmenor=listaFrontera.remove(0);
             listaInterior.add(nmenor);
             //camino_expandido[nmenor.cor.getY()][nmenor.cor.getX()]=ce;
+            
             camino_expandido[nmenor.cor.getY()][nmenor.cor.getX()]=(int)nmenor.h;
             ce++;
             //camino[nmenor.cor.getY()][nmenor.cor.getX()]=cc;
@@ -143,7 +144,7 @@ public class AEstrella {
                     //if(nmenor.pare!=null)
                     //System.out.println(" "+nmenor.pare.cor.getY()+ ", "+nmenor.pare.cor.getX());
                 }
-                System.out.println(coste_total);
+                //System.out.println(coste_total);
                 //camino[nmenor.cor.getY()][nmenor.cor.getX()]='x';
                // System.out.println(" "+nmenor.cor.getY()+ ", "+nmenor.cor.getX());
             }
@@ -168,6 +169,10 @@ public class AEstrella {
                            h = Util.cubeDistance(Util.evenr_to_cube(dragon), Util.evenr_to_cube(expand));
                            //h = Util.euclidea(dragon, expand);
                            nexpand= new Node(expand,nmenor,nmenor.g,h,w);
+                           /* 
+                           if(nexpand.cor.y==3&&nexpand.cor.x==1){
+                               System.out.println("El agua se expande");
+                           }*/
                            expandidos++;
                            //if(nexpand.cor.y==2&&nexpand.cor.x==3){
                                    //    System.out.println(expand.y+" , "+expand.x);
