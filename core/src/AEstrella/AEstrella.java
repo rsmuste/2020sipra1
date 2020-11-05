@@ -112,9 +112,9 @@ public class AEstrella {
             Collections.sort(listaFrontera);
             nmenor=listaFrontera.remove(0);
             listaInterior.add(nmenor);
-            //camino_expandido[nmenor.cor.getY()][nmenor.cor.getX()]=ce;
+            camino_expandido[nmenor.cor.getY()][nmenor.cor.getX()]=ce;
             
-            camino_expandido[nmenor.cor.getY()][nmenor.cor.getX()]=(int)nmenor.h;
+            //camino_expandido[nmenor.cor.getY()][nmenor.cor.getX()]=(int)nmenor.h;
             ce++;
             //camino[nmenor.cor.getY()][nmenor.cor.getX()]=cc;
             //cc++;
@@ -129,7 +129,7 @@ public class AEstrella {
             }*/
             if(nmenor.cor.getX()==dragon.getX()&&nmenor.cor.getY()==dragon.getY()){
                 //encontrada la solucion.
-                
+                coste_total=0;
                 encontrado=true;
                 Node auxPare= nmenor;
                 //Peso del camino segun sus casillas recorridas.
@@ -146,6 +146,7 @@ public class AEstrella {
                     //System.out.println(" "+nmenor.pare.cor.getY()+ ", "+nmenor.pare.cor.getX());
                     coste_total++;
                 }
+                camino[nmenor.cor.getY()][nmenor.cor.getX()]='x';
                 result = (int)Math.round(nmenor.g);
                 //System.out.println(coste_total);
                 //camino[nmenor.cor.getY()][nmenor.cor.getX()]='x';
@@ -202,6 +203,9 @@ public class AEstrella {
                                    //System.out.println(nexpand.cor.y+" , "+nexpand.cor.x+" : "+nexpand.g);
                                    if(nexpand.g<lista.g){
                                        //remplazar el viejo nodo por el nuevo
+                                       //System.out.println()
+                                   System.out.println(ce+" Antiguo "+lista.cor.y+" , "+lista.cor.x+" : "+lista.pare.cor.y+ ", "+lista.pare.cor.x+" : " +lista.g);
+                                   System.out.println("Nuevo "+nexpand.cor.y+" , "+nexpand.cor.x+" : "+nexpand.pare.cor.y+ ", "+nexpand.pare.cor.x+" : " +nexpand.g);
                                        listaFrontera.add(nexpand);
                                    }
                                    else{

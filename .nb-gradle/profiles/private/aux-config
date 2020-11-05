@@ -5,13 +5,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
       <group>
-        <file>file:/home/rober/Documentos/4ua/2020sipra1/core/src/AEstrella/Direction.java</file>
-        <file>file:/home/rober/Documentos/4ua/2020sipra1/core/src/AEstrella/Util.java</file>
-        <file>file:/home/rober/Documentos/4ua/2020sipra1/core/src/AEstrella/AEstrella.java</file>
-        <file>file:/home/rober/Documentos/4ua/2020sipra1/core/src/AEstrella/Mundo.java</file>
-        <file>file:/home/rober/Documentos/4ua/2020sipra1/core/src/AEstrella/Cube.java</file>
-        <file>file:/home/rober/Documentos/4ua/2020sipra1/core/src/AEstrella/Coordenada.java</file>
-        <file>file:/home/rober/Documentos/4ua/2020sipra1/core/src/AEstrella/Node.java</file>
+        <file>file:/home/rsm/Documentos/4ua/SI/2020sipra1/core/src/AEstrella/Util.java</file>
+        <file>file:/home/rsm/Documentos/4ua/SI/2020sipra1/core/src/AEstrella/Coordenada.java</file>
+        <file>file:/home/rsm/Documentos/4ua/SI/2020sipra1/core/src/AEstrella/AEstrella.java</file>
+        <file>file:/home/rsm/Documentos/4ua/SI/2020sipra1/core/src/AEstrella/Mundo.java</file>
+        <file>file:/home/rsm/Documentos/4ua/SI/2020sipra1/core/src/AEstrella/Cube.java</file>
+        <file>file:/home/rsm/Documentos/4ua/SI/2020sipra1/core/src/AEstrella/Node.java</file>
+        <file>file:/home/rsm/Documentos/4ua/SI/2020sipra1/core/src/AEstrella/Direction.java</file>
       </group>
     </open-files>
     <editor-bookmarks lastBookmarkId="0" xmlns="http://www.netbeans.org/ns/editor-bookmarks/2"/>
