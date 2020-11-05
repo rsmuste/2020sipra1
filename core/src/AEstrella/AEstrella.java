@@ -90,13 +90,14 @@ public class AEstrella {
         List<Node> listaFrontera = new ArrayList<>();
         Coordenada caballero=mundo.getCaballero();
         Coordenada dragon=mundo.getDragon();
-        //double h = Util.euclidea(dragon, caballero);
-        double h = Util.cubeDistance(Util.evenr_to_cube(dragon), Util.evenr_to_cube(caballero));
+        double h = Util.euclidea(dragon, caballero);
+        //double h = Util.cubeDistance(Util.evenr_to_cube(dragon), Util.evenr_to_cube(caballero));
+        //double h = Util.trivial();
 
         //Añadir Nodo Innicial a lista Frontera.
         listaFrontera.add(new Node(caballero,null,0,h,0));
         //expandidos++;
-        expandidos=1;
+        expandidos=0;
         //Coordenada dd = new Coordenada(2,7);
         //Coordenada dc = new Coordenada(1,6);
         //System.out.println(Util.cubeDistance(Util.evenr_to_cube(dragon), Util.evenr_to_cube(dc)));
@@ -170,8 +171,9 @@ public class AEstrella {
                        if(!(c=='b'||c=='p')){
                            //crear el nodo correspodiente
                            int w=Util.calcularPeso(c);
-                           h = Util.cubeDistance(Util.evenr_to_cube(dragon), Util.evenr_to_cube(expand));
-                           //h = Util.euclidea(dragon, expand);
+                           //h = Util.cubeDistance(Util.evenr_to_cube(dragon), Util.evenr_to_cube(expand));
+                           h = Util.euclidea(dragon, expand);
+                           //h = Util.trivial();
                            nexpand= new Node(expand,nmenor,nmenor.g,h,w);
                            /* 
                            if(nexpand.cor.y==3&&nexpand.cor.x==1){
@@ -204,8 +206,8 @@ public class AEstrella {
                                    if(nexpand.g<lista.g){
                                        //remplazar el viejo nodo por el nuevo
                                        //System.out.println()
-                                   System.out.println(ce+" Antiguo "+lista.cor.y+" , "+lista.cor.x+" : "+lista.pare.cor.y+ ", "+lista.pare.cor.x+" : " +lista.g);
-                                   System.out.println("Nuevo "+nexpand.cor.y+" , "+nexpand.cor.x+" : "+nexpand.pare.cor.y+ ", "+nexpand.pare.cor.x+" : " +nexpand.g);
+                                   //System.out.println(ce - 1 +" Antiguo "+lista.cor.y+" , "+lista.cor.x+" : "+lista.pare.cor.y+ ", "+lista.pare.cor.x+" : " +lista.g);
+                                   //System.out.println("Nuevo "+nexpand.cor.y+" , "+nexpand.cor.x+" : "+nexpand.pare.cor.y+ ", "+nexpand.pare.cor.x+" : " +nexpand.g);
                                        listaFrontera.add(nexpand);
                                    }
                                    else{

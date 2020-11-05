@@ -29,6 +29,12 @@ public class Util {
             case 'a':
                 res=3;
                 break;
+            case 'd':
+                res=1;
+                break;
+            case 'k':
+                res=0;
+                break;
             default:
                 res=1;
                 break;
@@ -49,6 +55,9 @@ public class Util {
         double res=0.0;
             res=Math.sqrt(Math.pow(destino.x-inicio.x,2)+Math.pow(destino.y-inicio.y,2));
         return res;
+    }
+    public static int trivial(){
+        return 1;
     }
     public static Cube offsetToCubeEvenQ(Coordenada hex){
         int x, y, z;
